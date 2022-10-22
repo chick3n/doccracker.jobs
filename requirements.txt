@@ -1,0 +1,15 @@
+# DO NOT include azure-functions-worker in this file
+# The Python Worker is managed by Azure Functions platform
+# Manually managing azure-functions-worker may cause unexpected issues
+
+azure-functions
+azure-data-tables
+azure-search-documents==11.4.0b1
+azure-storage-queue
+azure-ai-textanalytics==5.2.0b2
+azure-storage-blob
+stanza
+bert-extractive-summarizer
+sentence-transformers
+spacy
+#https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.4.1/en_core_web_lg-3.4.1-py3-none-any.whl

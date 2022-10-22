@@ -1,0 +1,60 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Sample DB",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/samples/sample_db.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "preLaunchTask": "BuildSamples"
+    },
+    {
+      "name": "Python: Sample Search",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/samples/sample_search.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "preLaunchTask": "BuildSamples"
+    },
+    {
+      "name": "Python: Sample Queue",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/samples/sample_queue.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "preLaunchTask": "BuildSamples"
+    },
+    {
+      "name": "Python: Sample Extractive Summary",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/samples/sample_ext_summary.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "preLaunchTask": "BuildSamples"
+    },
+    {
+      "name": "Python: Sample Storage",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/samples/sample_storage.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "preLaunchTask": "BuildSamples"
+    },
+    {
+      "name": "Python: Handle Queue",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/doccracker/handle_queue.py",
+      "args": ["document-requests"],
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "preLaunchTask": "BuildSamples"
+    }
+  ]
+}
