@@ -51,7 +51,7 @@
       "type": "python",
       "request": "launch",
       "program": "${workspaceFolder}/doccracker/handle_queue.py",
-      "args": ["document-requests"],
+      "args": ["extractive-summary"],
       "console": "integratedTerminal",
       "justMyCode": true,
       "preLaunchTask": "BuildSamples"

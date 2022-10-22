@@ -4,6 +4,7 @@ from shared.queue import Queue
 from models.job import JobRequest
 import json
 from dotenv import load_dotenv, find_dotenv
+import logging
 
 parser = argparse.ArgumentParser(description = 'Handle queue requests for DocCracker')
 parser.add_argument('queue', help='name of queue to retrieve from.')
@@ -12,11 +13,17 @@ SLEEP_SECONDS = 60
 
 
 def process_queue(queue:str):
-    queue_client = Queue()
+    queue_client = Queue(encode_base64=True, decode_base64=True)
     queue_messages = queue_client.retrieve(queue)
-    for message in queue_messages:        
-        job = JobRequest.from_queue_message(json.loads(message.content))
-        print(job)
+    for message in queue_messages:
+        try:  
+            job = JobRequest.from_queue_message(json.loads(message.content))
+            print(job)
+        except Exception as e:
+            logging.critical(str(e), exc_info=e)
+
+def process_job(job:JobRequest) -> bool:
+    pass
 
 load_dotenv(find_dotenv())
 while(True):
