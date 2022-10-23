@@ -2,24 +2,17 @@ from summarizer.sbert import SBertSummarizer
 import spacy
 from spacy.tokens import Span
 from spacy.lang.en import English
+from typing import List, Tuple
 import os
 
 class ExtractiveSummary:
-    def __init__(self, texts:list[str] = []):
-        self.texts = texts
+    def __init__(self):
         self.nlp = spacy.load('en_core_web_lg')
 
-    def sbertsummary(self, model='paraphrase-MiniLM-L6-v2', summary_sentences=3) -> list[str] | str:
+    def sbertsummary(self, text, model='paraphrase-MiniLM-L6-v2', summary_sentences=3) -> str:
         model = SBertSummarizer(model)
-        response = []
-        for text in self.texts:
-            sentences = self.__sentence_extraction(text)
-            summary = model(' '.join(sentences), num_sentences=summary_sentences)
-            response.append(summary)
-        
-        if len(response) == 1:
-            return response[0]
-        return response
+        sentences = self.__sentence_extraction(text)
+        return model(' '.join(sentences), num_sentences=summary_sentences)
 
     def __sentence_extraction(self, text):
         if text is None:

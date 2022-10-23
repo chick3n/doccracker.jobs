@@ -8,7 +8,7 @@
       "program": "${workspaceFolder}/samples/sample_db.py",
       "console": "integratedTerminal",
       "justMyCode": true,
-      "preLaunchTask": "BuildSamples"
+      "preLaunchTask": "pip install (functions)"
     },
     {
       "name": "Python: Sample Search",
@@ -17,7 +17,7 @@
       "program": "${workspaceFolder}/samples/sample_search.py",
       "console": "integratedTerminal",
       "justMyCode": true,
-      "preLaunchTask": "BuildSamples"
+      "preLaunchTask": "pip install (functions)"
     },
     {
       "name": "Python: Sample Queue",
@@ -26,7 +26,7 @@
       "program": "${workspaceFolder}/samples/sample_queue.py",
       "console": "integratedTerminal",
       "justMyCode": true,
-      "preLaunchTask": "BuildSamples"
+      "preLaunchTask": "pip install (functions)"
     },
     {
       "name": "Python: Sample Extractive Summary",
@@ -35,7 +35,7 @@
       "program": "${workspaceFolder}/samples/sample_ext_summary.py",
       "console": "integratedTerminal",
       "justMyCode": true,
-      "preLaunchTask": "BuildSamples"
+      "preLaunchTask": "pip install (functions)"
     },
     {
       "name": "Python: Sample Storage",
@@ -44,17 +44,18 @@
       "program": "${workspaceFolder}/samples/sample_storage.py",
       "console": "integratedTerminal",
       "justMyCode": true,
-      "preLaunchTask": "BuildSamples"
+      "preLaunchTask": "pip install (functions)"
     },
     {
       "name": "Python: Handle Queue",
       "type": "python",
       "request": "launch",
-      "program": "${workspaceFolder}/doccracker/handle_queue.py",
+      //"program": "${workspaceFolder}/doccracker/handle_queue.py",
+      "module": "doccracker.handle_queue",
       "args": ["extractive-summary"],
       "console": "integratedTerminal",
       "justMyCode": true,
-      "preLaunchTask": "BuildSamples"
+      "preLaunchTask": "pip install (functions)"
     }
   ]
 }

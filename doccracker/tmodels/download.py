@@ -12,4 +12,4 @@ stanza.download('en', model_dir=f'{root}/tmodels')
 try:
     spacy.load('en_core_web_lg')
 except:
-    download('en')
+    download('en_core_web_lg')

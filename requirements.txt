@@ -2,6 +2,7 @@
 # The Python Worker is managed by Azure Functions platform
 # Manually managing azure-functions-worker may cause unexpected issues
 
+python-dotenv
 azure-functions
 azure-data-tables
 azure-search-documents==11.4.0b1
