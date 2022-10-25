@@ -1,10 +1,9 @@
 import json
 from .shared import Database, Search, BlobStorage
-from .models.job import JobRequest, JobAction, JobEntity, JobState
+from .models.job import JobOptionEntity, JobRequest, JobAction, JobEntity, JobState
 import logging
-from .jobs.summary import ExtractiveSummary
+from .jobs.summary import ExtractiveSummary, ExtractiveSummaryOptions
 import os
-
 
 def process_job(job:JobRequest) -> bool:    
     db_client = Database()
@@ -26,7 +25,7 @@ def process_job(job:JobRequest) -> bool:
 def process_extractive_summary(job:JobEntity) -> None:
     search = Search(job.PartitionKey)    
     blob_client = BlobStorage()
-    sum_client = ExtractiveSummary()
+    sum_client = ExtractiveSummary(options=job.options_dict())
     upload_container = os.environ['Container_CompleteName']
     
     summaries = {}

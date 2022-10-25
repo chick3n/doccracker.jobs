@@ -5,14 +5,32 @@ from spacy.lang.en import English
 from typing import List, Tuple
 import os
 
-class ExtractiveSummary:
-    def __init__(self):
-        self.nlp = spacy.load('en_core_web_lg')
+from doccracker.models.job import JobOptionEntity
 
-    def sbertsummary(self, text, model='paraphrase-MiniLM-L6-v2', summary_sentences=3) -> str:
+class ExtractiveSummaryOptions:
+    def __init__(self, options:dict={}):
+        if options:
+            self.__from_dict(options)
+
+    max_sentences: int = 3
+    
+    def __from_dict(self, options:dict):
+        if options is not None:
+            for option, value in options:
+                if option == 'max_sentences':
+                    try:
+                        self.max_sentences = int(value)
+                    except: pass
+
+class ExtractiveSummary:
+    def __init__(self, **kwargs):
+        self.nlp = spacy.load('en_core_web_lg')
+        self.options = ExtractiveSummaryOptions(kwargs.pop('options', {}))
+
+    def sbertsummary(self, text, model='paraphrase-MiniLM-L6-v2') -> str:
         model = SBertSummarizer(model)
         sentences = self.__sentence_extraction(text)
-        return model(' '.join(sentences), num_sentences=summary_sentences)
+        return model(' '.join(sentences), num_sentences=self.options.max_sentences)
 
     def __sentence_extraction(self, text):
         if text is None:
