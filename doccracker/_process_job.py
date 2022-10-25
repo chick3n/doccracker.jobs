@@ -35,7 +35,8 @@ def process_extractive_summary(job:JobEntity) -> None:
         if summary:
             summaries[document.RowKey] = summary
 
-    blob_client.upload(upload_container, job.RowKey, json.dumps(summaries, indent=4, default=str))
+    blob_client.upload(upload_container, f'{job.RowKey}.json'
+        , json.dumps(summaries, indent=4, default=str))
     
 
 

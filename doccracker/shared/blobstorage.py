@@ -11,4 +11,4 @@ class BlobStorage:
 
     def upload(self, container_name:str, filename:str, text:str) -> None:
         client = self.__client(container=container_name, blobname=filename)
-        client.upload_blob(text)
+        client.upload_blob(text, overwrite=True)

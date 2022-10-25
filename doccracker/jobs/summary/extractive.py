@@ -16,7 +16,7 @@ class ExtractiveSummaryOptions:
     
     def __from_dict(self, options:dict):
         if options is not None:
-            for option, value in options:
+            for option, value in options.items():
                 if option == 'max_sentences':
                     try:
                         self.max_sentences = int(value)

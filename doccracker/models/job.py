@@ -1,5 +1,7 @@
 from datetime import datetime
 from dataclasses import dataclass, field
+from email.policy import default
+from typing import Any
 
 
 class JobState:
@@ -86,9 +88,9 @@ class JobEntity(DbEntity):
 
     PartitionKey: str
     RowKey: str
-    State: str
-    Action: str
-    CreatedOn: datetime
+    State: str|None = None
+    Action: str|None = None
+    CreatedOn: datetime|None = None
     Documents: list[JobDocumentEntity] = field(default_factory=list)
     Options: list[JobOptionEntity] = field(default_factory=list)
 
@@ -97,3 +99,12 @@ class JobEntity(DbEntity):
         for option in self.Options:
             opts[option.Name] = option.Value
         return opts
+
+    def get_entity(self) -> dict[str, Any]:
+        return {
+            'PartitionKey': self.PartitionKey,
+            'RowKey': self.RowKey,
+            'State': self.State,
+            'Action': self.Action,
+            'CreatedOn': self.CreatedOn
+        }
