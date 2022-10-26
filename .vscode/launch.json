@@ -47,12 +47,34 @@
       "preLaunchTask": "pip install (functions)"
     },
     {
-      "name": "Python: Handle Queue",
+      "name": "Python: Handle Queue (Extractive)",
       "type": "python",
       "request": "launch",
       //"program": "${workspaceFolder}/doccracker/handle_queue.py",
       "module": "doccracker.handle_queue",
       "args": ["extractive-summary"],
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "preLaunchTask": "pip install (functions)"
+    },
+    {
+      "name": "Python: Handle Queue (Abstractive)",
+      "type": "python",
+      "request": "launch",
+      //"program": "${workspaceFolder}/doccracker/handle_queue.py",
+      "module": "doccracker.handle_queue",
+      "args": ["abstractive-summary"],
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "preLaunchTask": "pip install (functions)"
+    },
+    {
+      "name": "Python: Handle Queue (Prompter)",
+      "type": "python",
+      "request": "launch",
+      //"program": "${workspaceFolder}/doccracker/handle_queue.py",
+      "module": "doccracker.handle_queue",
+      "args": ["prompt-completion"],
       "console": "integratedTerminal",
       "justMyCode": true,
       "preLaunchTask": "pip install (functions)"

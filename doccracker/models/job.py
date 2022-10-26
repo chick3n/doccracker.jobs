@@ -12,6 +12,7 @@ class JobState:
 class JobAction:
     ExtractiveSummary='ExtractiveSummary'
     AbstractiveSummary='AbstractiveSummary'
+    Prompt='Prompt'
 
 @dataclass
 class JobRequest:

@@ -11,7 +11,7 @@ import json
 parser = argparse.ArgumentParser(description = 'Handle queue requests for DocCracker')
 parser.add_argument('queue', help='name of queue to retrieve from.')
 args = parser.parse_args()
-SLEEP_SECONDS = 60
+SLEEP_SECONDS = int(60)
 
 def process_queue(queue:str) -> int:
     queue_client = Queue(encode_base64=True, decode_base64=True)
