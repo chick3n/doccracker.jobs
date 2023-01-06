@@ -17,12 +17,12 @@ class OpenAi:
     models:dict = {
         'summary:4': OpenAiEngine('curie-001', '$', 2048),
         'summary:3': OpenAiEngine('summary-ada', '$$', 2048),
-        'summary:2': OpenAiEngine('text-davinci-002', '$$$', 4098),
-        'summary:1': OpenAiEngine('text-davinci-002', '$$$', 4098),
+        'summary:2': OpenAiEngine('text-davinci-002', '$$$', 4097),
+        'summary:1': OpenAiEngine('text-davinci-002', '$$$', 4097),
         '4': OpenAiEngine('curie-001', '$', 2048),
         '3': OpenAiEngine('summary-ada', '$$', 2048),
-        '2': OpenAiEngine('text-davinci-002', '$$$', 4098),
-        '1': OpenAiEngine('text-davinci-002', '$$$', 4098),
+        '2': OpenAiEngine('text-davinci-002', '$$$', 4097),
+        '1': OpenAiEngine('text-davinci-002', '$$$', 4097),
     }
 
     def __init__(self):

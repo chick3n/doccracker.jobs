@@ -35,16 +35,17 @@ class Prompter(NlpBase):
 
         engine = openai.deployment_model(self.options.cost, 'prompt')
         sentences = self.sentence_extraction(text)
-        prompt_request = f'{self.options.prompt}\n\n'
-        prompt_tokens = openai.get_num_tokens(prompt_request)
+        prefix = f'{self.options.prompt}\n#####\n'
+        suffix = '######'
+        prompt_tokens = openai.get_num_tokens(prefix + suffix)
         token_limit = engine.token_limit - prompt_tokens - (self.options.max_sentences * 30)
         packages = openai.prompt_tokenizer(sentences, token_limit)
         summary = []
 
         for prompt in packages:
-            prompt_text  = str(prompt_request)+prompt
+            prompt_text  = str(prefix)+prompt+'\n'+str(suffix)
             max_token_limit = engine.token_limit - openai.get_num_tokens(prompt_text)
-            sum = openai.prompt(engine, prompt_text, max_token_limit)
+            sum = openai.prompt(engine, prompt_text, max_token_limit, suffix=suffix)
             summary.append(sum)
 
         return ' '.join(summary)
