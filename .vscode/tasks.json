@@ -2,10 +2,6 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "BuildSamples",
-      "dependsOn": "pip install (samples)"
-    },
-    {
       "label": "pip install (functions)",
       "type": "shell",
       "osx": {
@@ -17,21 +13,6 @@
       "linux": {
         "command": "${config:azureFunctions.pythonVenv}/bin/python -m pip install -r requirements.txt"
       },
-      "problemMatcher": []
-    },
-    {
-      "label": "pip install (samples)",
-      "type": "shell",
-      "osx": {
-        "command": "${config:azureFunctions.pythonVenv}/bin/python -m pip install -r ./samples/requirements.txt"
-      },
-      "windows": {
-        "command": "${config:azureFunctions.pythonVenv}\\Scripts\\python -m pip install -r ./samples/requirements.txt"
-      },
-      "linux": {
-        "command": "${config:azureFunctions.pythonVenv}/bin/python -m pip install -r ./samples/requirements.txt"
-      },
-      "dependsOn": "pip install (functions)",
       "problemMatcher": []
     }
   ]

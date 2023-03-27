@@ -1,13 +1,18 @@
-from asyncio import QueueEmpty
 from datetime import datetime
-from typing import List, Type
 from dataclasses import dataclass, field
+from email.policy import default
+from typing import Any
 
 
 class JobState:
     Pending = 'Pending'
     Completed = 'Completed'
     Failed = 'Failed'
+
+class JobAction:
+    ExtractiveSummary='ExtractiveSummary'
+    AbstractiveSummary='AbstractiveSummary'
+    Prompt='Prompt'
 
 @dataclass
 class JobRequest:
@@ -36,8 +41,8 @@ class Job:
     index: str
     state: str
     action: str
-    created_on: datetime = None
-    documents: List[Type[JobDocument]] = field(default_factory=list)
+    created_on: datetime|None = None
+    documents: list[JobDocument] = field(default_factory=list)
 
     @classmethod
     def from_entity(cls, entity):
@@ -53,14 +58,25 @@ class DbEntity:
     Timestamp: datetime
 
 class JobDocumentEntity(DbEntity):
-    def __init__(self, table_entity:dict=None):
+    def __init__(self, table_entity:dict={}):
         if table_entity is not None:
             for k, v in table_entity.items():
                 setattr(self, k, v)
     Title: str
 
+class JobOptionEntity(DbEntity):
+    def __init__(self, table_entity:dict={}):
+        if table_entity is not None:
+            for k, v in table_entity.items():
+                setattr(self, k, v)
+
+    Name: str
+    Value: str
+
 class JobEntity(DbEntity):
-    def __init__(self, table_entity:dict=None, document_entities:List[JobDocumentEntity]=None):
+    def __init__(self, table_entity:dict={}, 
+        document_entities:list[JobDocumentEntity]=[],
+        options:list[JobOptionEntity]=[]):
         if table_entity is not None:
             for k, v in table_entity.items():
                 setattr(self, k, v)
@@ -68,9 +84,28 @@ class JobEntity(DbEntity):
         if document_entities is not None:
             self.Documents = document_entities
 
+        if options is not None:
+            self.Options = options
+
     PartitionKey: str
     RowKey: str
-    State: str
-    Action: str
-    CreatedOn: datetime
-    Documents: List[JobDocumentEntity] = field(default_factory=list)
+    State: str|None = None
+    Action: str|None = None
+    CreatedOn: datetime|None = None
+    Documents: list[JobDocumentEntity] = field(default_factory=list)
+    Options: list[JobOptionEntity] = field(default_factory=list)
+
+    def options_dict(self) -> dict:
+        opts = {}
+        for option in self.Options:
+            opts[option.Name] = option.Value
+        return opts
+
+    def get_entity(self) -> dict[str, Any]:
+        return {
+            'PartitionKey': self.PartitionKey,
+            'RowKey': self.RowKey,
+            'State': self.State,
+            'Action': self.Action,
+            'CreatedOn': self.CreatedOn
+        }
